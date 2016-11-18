@@ -1,0 +1,30 @@
+/*body {background: #000000;}*/
+.my-mark {
+    background: rgba(0, 0, 0, 0) url("../img/mark1.png") repeat scroll 0 0;
+    border: 2px solid #180000;
+    border-radius: 3px;
+    bottom: 5px;
+    box-shadow: 1px 1px 0 white, 0 0 2px black;
+    height: 15px;
+    position: fixed;
+    right: 5px;
+    width: 90px;
+    z-index: 100;
+}
+
+.my-mark:hover {
+    /*box-shadow: 0 14px 2px black, 1px 52px 2px black, -1px 14px 2px black, 1px 1px 2px rgb(254, 236, 203), -1px 0 2px wheat;*/
+    height: 54px;
+}
+.welcome {
+    font-size: 40px;
+    height: 200px;
+    left: 50%;
+    margin: -100px 0 0 -300px;
+    position: fixed;
+    text-align: center;
+    text-shadow: 1px 1px 0 white, 0 0 2px black;
+    top: 50%;
+    width: 600px;
+
+}
