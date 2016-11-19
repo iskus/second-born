@@ -18,7 +18,7 @@ $mongoConfig = clone $mysqlConfig;
 
 $mysqlConfig->host = 'localhost';
 $mysqlConfig->user = 'root';
-$mysqlConfig->pass = 'antonjan88';
+$mysqlConfig->pass = '';
 $mysqlConfig->db = 'test';
 $configCollection->offsetSet('mysql', $mysqlConfig);
 
