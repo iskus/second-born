@@ -28,7 +28,7 @@ class Login extends Shadow
                 $pass = sha1($pass);
                 $bro = (new Bro())->getEntitys(['email' => $login, 'pass' => $pass])[1];
 
-                var_dump($_SESSION, $bro);
+//                var_dump($_SESSION, $bro);
                 if ($bro->role == 'admin') {
                     session_start();//стартуем сессию
                     $_SESSION['logSESS'] = $bro->login;//создаем глобальную переменную

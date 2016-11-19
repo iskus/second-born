@@ -15,7 +15,14 @@ class UsefulData
 
     public static function getRequest($key = false, $method = 'REQUEST', $type = false)
     {
-        if (!$key) return $key;
+//        return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $_REQUEST;
+        if (is_array($value = $_REQUEST[$key]))
+        {
+
+//        var_dump(self::$alphabets);
+//            array_walk($value, 'htmlspecialchars');
+            return $value;
+        }
         $method = strtoupper('_' . $method);
         switch ($method) {
             case '_POST':
@@ -33,7 +40,12 @@ class UsefulData
 
             case '_REQUEST':
             default:
-                $value = isset($_REQUEST[$key]) ? htmlspecialchars($_REQUEST[$key]) : false;
+                if (!is_array($_REQUEST[$key])) {
+                    $value = isset($_REQUEST[$key]) ? htmlspecialchars($_REQUEST[$key]) : false;
+                } else {
+                    $value = $_REQUEST[$key];
+                    array_walk($value, 'htmlspecialchars');
+                }
                 break;
 
         }

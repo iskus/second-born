@@ -37,7 +37,7 @@ class View
 
     public function addScripts()
     {
-        require_once PATH_TO_TEMPLATES . 'script.php';
+        require_once PATH_TO_TEMPLATES . "script.php";
         foreach ($scripts as $script) {
             $this->page['head']->append(pq('<script>')->attr('src', '/web/js/' . $script . '.js'));
 
@@ -46,7 +46,7 @@ class View
 
     public function addStyles()
     {
-        require_once PATH_TO_TEMPLATES . 'css.php';
+        require_once PATH_TO_TEMPLATES . "css.php";
         foreach ($styles as $style) {
             $this->page['head']->append(
                 pq('<link/>')->attr('href', '/web/css/' . $style . '.css')

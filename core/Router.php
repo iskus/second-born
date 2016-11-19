@@ -13,8 +13,10 @@ class Router
     function __construct()
     {
         $route = explode('/', UsefulData::getRequest('route'));
-        $mainController = (isset($route[0]) && $route[0]) ? $route[0] : 0;
-//        var_dump(UsefulData::getRequest('route'), $route);
+        $mainController = isset($route[0]) ? $route[0] : 'Index';
+
+//        var_dump(UsefulData::getRequest('route'), $_REQUEST);
+
         if ($mainController && $route != '/') {
 
             $this->controller = ucfirst($route[0]);

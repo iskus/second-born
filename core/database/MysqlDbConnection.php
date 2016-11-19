@@ -98,12 +98,15 @@ class MysqlDbConnection extends \mysqli
         }
         $query = "SELECT * FROM {$this->table} {$where} {$limit}";
 //var_dump($query);
+//        $result = $this->query($query)->fetch_all();
+//        var_dump($result);
         if (!$result = $this->query($query)) return FALSE;
 
         $out = [];
         while ($row = $result->fetch_object()) {
             $out[$row->id] = $row;
         }
+//        var_dump($out); die;
         return $out;
     }
 
