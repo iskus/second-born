@@ -33,7 +33,7 @@ class Transfer extends Model
             $comission = new TransferComission('tax', $item->price);
             $item->price = $comission->getTotal();
             $amount += $item->price / 100;
-            $this->values[] = "(null, @TID, {$item->id}, {$item->cnt})";
+            $this->values[] = "(null, @TID, {$item->id}, {$item->cnt}, null)";
         }
         $comission = new TransferComission('tax', $amount);
         $this->setAmount(round($comission->getTotal(), 2));
@@ -76,30 +76,28 @@ class Transfer extends Model
 
     private function save()
     {
-
-
         $sql = "
         SET autocommit=0;
         START TRANSACTION;
         
-#        SELECT @A:=(balance - {$this->getAmount()})
-#                FROM account WHERE id={$this->accountFromId};
-#        SELECT @B:=(balance + {$this->getAmount()})
-#            FROM account WHERE id={$this->accountToId};
-                
-                
-                
-                
-                
-            UPDATE account SET balance={$this->fbalance} WHERE id={$this->accountFromId};
-            UPDATE account SET balance={$this->tbalance} WHERE id={$this->accountToId};
-	        INSERT INTO transfer 
-	            VALUE (null, {$this->accountFromId}, {$this->accountToId}, {$this->getAmount()});
-	        SELECT @TID:=max(id) FROM transfer;
-	        INSERT INTO transfer_operation VALUES " . implode(', ', $this->values) . ";
+        SELECT @A:=(balance - {$this->getAmount()})
+                FROM account WHERE id={$this->accountFromId};
+        SELECT @B:=(balance + {$this->getAmount()})
+               FROM account WHERE id={$this->accountToId};
+                                
+        UPDATE account SET balance={$this->fbalance} WHERE id={$this->accountFromId};
+        UPDATE account SET balance={$this->tbalance} WHERE id={$this->accountToId};
+
+	    INSERT INTO transfer 
+	            VALUES (null, {$this->accountFromId}, {$this->accountToId}, {$this->getAmount()}, null);
+	            
+	    SELECT @TID:=max(id) FROM transfer;
+	        
+	    INSERT INTO transfer_operation VALUES " . implode(', ', $this->values) . ";
+        
         COMMIT;
         ";
-//        var_dump($sql);
+        var_dump($sql);
         return $this->Db->query($sql);
     }
 
